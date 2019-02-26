@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import TodosApp from './TodosApp.vue';
 import Home from './views/Home.vue';
 import About from './views/About.vue';
+import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
 
 Vue.config.productionTip = false;
 
@@ -20,6 +22,7 @@ const router = new Router({
 });
 
 Vue.use(Router);
+Vue.use(ElementUI);
 
 new Vue({
 	router,
