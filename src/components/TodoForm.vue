@@ -8,11 +8,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
 	name: 'TodoForm',	
 	methods: {
+		...mapActions([
+			'createNewTodo'
+		]),
 		addNew() {
-			this.$emit('add-new', this.newTitle);
+			this.createNewTodo(this.newTitle);
 			this.newTitle = '';
 		}
 	},

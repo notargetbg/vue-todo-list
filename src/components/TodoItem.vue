@@ -1,6 +1,6 @@
 <template>
 	<div class='todo-item d-flex'>
-		<el-checkbox v-on:change='toggleTask'>
+		<el-checkbox v-on:change='toggleTodoStatus'>
 			{{item.title}}
 		</el-checkbox>
 		<i v-on:click='deleteItem' class='el-icon-close'></i>
@@ -8,17 +8,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
 	name: 'TodoItem',
 	props: ['item'],
 	methods: {
+		...mapActions([
+			'deleteTodo',
+			'toggleTodo'
+		]),
 		deleteItem() {
-			this.$emit('delete-item', this.item.id);
+			this.deleteTodo(this.item.id);
 		},
-		toggleTask() {
-			this.item.isDone = !this.item.isDone;
+		toggleTodoStatus() {
+			this.toggleTodo(this.item.id);
 		}
-	}
+		
+	},
 }
 </script>
 
