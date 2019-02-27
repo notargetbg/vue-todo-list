@@ -1,22 +1,46 @@
 <template>
 	<div class='todos'>
-		<div class='box top-b-radius'>
-			<el-form class='d-flex'>
-				<el-input placeholder='Add todo' class='todo-title-input'></el-input>	
-				<el-button type='primary'>Add</el-button>
-			</el-form>
-		</div>
-		<TodoList v-bind:todos='todos'/>
+		<TodoForm v-on:add-new='addNew' />
+		<TodoList v-bind:todos='todos' v-on:delete-item='handleDel'/>
 	</div>
 </template>
 
 <script>
 import TodoList from '../components/TodoList';
+import TodoForm from '../components/TodoForm';
+
+function createId(collection) {
+	const ids = collection.map(todo => todo.id);
+	if (ids.length === 0) {
+		return 1;
+	}
+	return Math.max(...ids) + 1;
+}
 
 export default {
 	name: 'Home',
 	components: {
-		TodoList
+		TodoList,
+		TodoForm
+	},
+	methods: {
+		handleDel(id) {
+			this.todos = this.todos.reduce((acc, todo) => {
+				if (id !== todo.id) {
+					acc.push(todo);
+					return acc;
+				}
+				return acc;
+			}, []);
+		},
+		addNew(newTitle) {
+			const todo = {
+				id: createId(this.todos),
+				title: newTitle,
+				isDone: false
+			};
+			this.todos.push(todo);
+		}
 	},
 	data() {
 		return {
@@ -47,8 +71,5 @@ export default {
 		border-radius: 4px;
 		overflow: hidden;
 		border: 1px solid #dcdfe6;
-	}
-	.todo-title-input {
-		margin-right: 20px;
 	}
 </style>
