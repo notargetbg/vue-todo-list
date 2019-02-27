@@ -3,9 +3,8 @@
 		<img alt='Vue logo' src='../assets/logo.png' class='vue-logo'>
 		<h1>Welcome to my Todo List App</h1>
 		<p>
-			powered by Vue.js/Vuex with Node/Express and Postgres db.
+			powered by <strong>Vue.js/Vuex</strong> with <strong>Node/Express</strong> and <strong>Postgres</strong>
 		</p>
-		<router-link to='/'>Back to app</router-link>
 	</div>
 </template>
 
@@ -16,5 +15,7 @@ export default {
 </script>
 
 <style scoped>
-
+	.hello {
+		text-align: center;
+	}
 </style>
