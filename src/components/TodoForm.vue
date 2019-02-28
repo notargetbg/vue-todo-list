@@ -17,6 +17,9 @@ export default {
 			'createNewTodo'
 		]),
 		addNew() {
+			if (!this.newTitle) {
+				return;
+			}
 			this.createNewTodo(this.newTitle);
 			this.newTitle = '';
 		}

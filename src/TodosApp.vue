@@ -52,4 +52,11 @@ export default {
 	.d-flex {
 		display: flex;
 	}
+	.el-loading-spinner {
+		margin-top: -15px;
+	}
+	.el-loading-spinner .circular {
+		width: 30px;
+		height: 30px;
+	}
 </style>

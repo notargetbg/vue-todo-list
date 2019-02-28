@@ -1,7 +1,7 @@
 <template>
 	<div class='todos'>
 		<TodoForm />
-		<TodoList v-bind:todos='getTodos' />
+		<TodoList />
 	</div>
 </template>
 
@@ -14,11 +14,6 @@ export default {
 	components: {
 		TodoList,
 		TodoForm
-	},
-	computed: {
-		getTodos() {
-			return this.$store.state.todos;
-		}
 	}
 }
 </script>

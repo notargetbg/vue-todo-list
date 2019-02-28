@@ -6,12 +6,16 @@ import About from './views/About.vue';
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
 import Vuex from 'vuex';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+ 
 
 Vue.config.productionTip = false;
 
 Vue.use(Router);
 Vue.use(ElementUI);
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
 
 function createId(collection) {
 	const ids = collection.map(todo => todo.id);
@@ -36,31 +40,20 @@ const router = new Router({
 
 const store = new Vuex.Store({
 	state: {
-		todos: [
-			{
-				id: 1,
-				title: 'Clean apartment',
-				isDone: false
-			},
-			{
-				id: 2,
-				title: 'Do breakfast',
-				isDone: false
-			},
-			{
-				id: 3,
-				title: 'Learn Vue',
-				isDone: false
-			}
-		]
+		todos: [],
+		isLoading: false
 	},
 	getters: {},
 	mutations: {
 		addNew(state, todo) {
 			state.todos.push(todo);
 		},
-		deleteTodo(state, todos) {
+		recieveTodosStarted(state) {
+			state.isLoading = true;
+		},
+		recieveTodos(state, todos) {
 			state.todos = todos;
+			state.isLoading = false;
 		},
 		toggleTodo(state, id) {
 			const todo = state.todos.find(todo => todo.id === id);
@@ -84,10 +77,22 @@ const store = new Vuex.Store({
 				}
 				return acc;
 			}, []);
-			commit('deleteTodo', todos)
+			commit('recieveTodos', todos)
 		},
 		toggleTodo({ commit }, id) {
 			commit('toggleTodo', id);
+		},
+		getTodos({ commit }) {
+			commit('recieveTodosStarted');
+			Vue.axios.get(`http://localhost:5000/API/todos`)
+				.then(response => {
+					commit('recieveTodos', response.data.todos)
+					
+				})
+				.catch(e => {
+					throw new Error(e);
+				})
+			
 		}
 	}
 });

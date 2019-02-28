@@ -23,9 +23,8 @@ export default {
 		},
 		toggleTodoStatus() {
 			this.toggleTodo(this.item.id);
-		}
-		
-	},
+		}		
+	}
 }
 </script>
 
