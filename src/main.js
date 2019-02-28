@@ -116,7 +116,7 @@ const store = new Vuex.Store({
 					throw new Error(e);
 				})
 		},
-		getTodos({ commit }) {
+		getTodos({ commit, state }) {
 			commit('recieveTodosStarted');
 			Vue.axios.get(`http://localhost:5000/API/todos`)
 				.then(response => {
@@ -124,6 +124,7 @@ const store = new Vuex.Store({
 					
 				})
 				.catch(e => {
+					state.isLoading = false;
 					throw new Error(e);
 				})
 			

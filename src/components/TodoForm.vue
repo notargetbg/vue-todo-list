@@ -11,7 +11,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-	name: 'TodoForm',	
+	name: 'TodoForm',
 	methods: {
 		...mapActions([
 			'createNewTodo'
