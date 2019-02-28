@@ -25,6 +25,12 @@ function createId(collection) {
 	return Math.max(...ids) + 1;
 }
 
+function orderById(collection) {
+	return collection.sort((a, b) => {
+		return a.id - b.id;
+	});
+}
+
 const router = new Router({
 	routes: [
 		{
@@ -63,30 +69,58 @@ const store = new Vuex.Store({
 	actions: {
 		createNewTodo({ commit, state }, newTitle) {
 			const todo = {
-				id: createId(state.todos),
+				// id: createId(state.todos),
 				title: newTitle,
 				isDone: false
 			};
-			commit('addNew', todo);
+
+			Vue.axios.post(`http://localhost:5000/API/todos`, {
+				title: todo.title,
+				isDone: todo.isDone
+			})
+			.then(response => {
+				commit('addNew', response.data.todo);
+				
+			})
+			.catch(e => {
+				throw new Error(e);
+			})
 		},
 		deleteTodo({ commit, state }, id) {
-			const todos = state.todos.reduce((acc, todo) => {
-				if (id !== todo.id) {
-					acc.push(todo);
-					return acc;
-				}
-				return acc;
-			}, []);
-			commit('recieveTodos', todos)
+			Vue.axios.delete(`http://localhost:5000/API/todos/${id}`)
+				.then(response => {
+					const todos = state.todos.reduce((acc, todo) => {
+						if (response.data.id !== todo.id) {
+							acc.push(todo);
+							return acc;
+						}
+						return acc;
+					}, []);
+
+					commit('recieveTodos', todos)
+				})
+				.catch(e => {
+					throw new Error(e);
+				})
 		},
-		toggleTodo({ commit }, id) {
-			commit('toggleTodo', id);
+		toggleTodo({ commit, state }, id) {
+			const todo = state.todos.find(todo => todo.id === id);
+
+			Vue.axios.put(`http://localhost:5000/API/todos/${id}`, {
+				isDone: !todo.isDone
+			})
+				.then(response => {
+					commit('toggleTodo', response.data.todo.id);
+				})
+				.catch(e => {
+					throw new Error(e);
+				})
 		},
 		getTodos({ commit }) {
 			commit('recieveTodosStarted');
 			Vue.axios.get(`http://localhost:5000/API/todos`)
 				.then(response => {
-					commit('recieveTodos', response.data.todos)
+					commit('recieveTodos', orderById(response.data.todos))
 					
 				})
 				.catch(e => {

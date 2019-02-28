@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	if (!req.body.isDone) {
+	if (!req.body.title || typeof req.body.isDone === 'undefined') {
 		return res.status(400).send({ message: 'Input data missing.' });
 	}
 	todo.create(
@@ -32,7 +32,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-	if (!req.body.title && !req.body.isDone) {
+	if (!req.body.title && typeof req.body.isDone === 'undefined') {
 		return res.status(400).send({ message: 'Input data missing.' });
 	}
 

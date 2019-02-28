@@ -1,6 +1,6 @@
 <template>
 	<div class='todo-item d-flex'>
-		<el-checkbox v-on:change='toggleTodoStatus'>
+		<el-checkbox v-on:change='toggleTodoStatus' :checked='item.isDone'>
 			{{item.title}}
 		</el-checkbox>
 		<i v-on:click='deleteItem' class='el-icon-close'></i>
