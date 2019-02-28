@@ -1,7 +1,7 @@
 <template>
 	<div class='box top-b-radius'>
 		<el-form class='d-flex'>
-			<el-input placeholder='Add todo' v-model='newTitle' class='todo-title-input'></el-input>	
+			<el-input placeholder='Add todo' @keyup.enter.prevent.native='addNew' v-model='newTitle' class='todo-title-input'></el-input>	
 			<el-button type='primary' @click='addNew'>Add</el-button>
 		</el-form>
 	</div>
