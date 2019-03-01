@@ -4,10 +4,12 @@
 ```
 npm install
 ```
-
-Please install postgress and pgadmin in order to run the DB.
-Backup file for the db table is included in main directory - todos.file
-Use it in order to restore the db inside pg admin. DB owner can be postgress.
+####
+- Please install postgress and pgadmin in order to run the DB.
+####
+- Backup file for the db table is included in main directory - todos.file
+####
+- Use it in order to restore the db inside pg admin. DB owner can be postgress.
 
 ### Compiles and hot-reloads for development
 ```
