@@ -1,5 +1,9 @@
 # todo-list
 
+Thank you for the opportunity to work on this assignment. It was pleasure and fun to learn Vue/Vuex. Nice framework to work with.
+Also thank you for the push in order for me to learn to do basic unit testing.
+I hope you like it.
+
 ## Project setup
 ```
 npm install
