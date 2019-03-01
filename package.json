@@ -31,6 +31,7 @@
 		"babel-plugin-component": "^1.1.1",
 		"babel-preset-env": "^1.7.0",
 		"eslint": "^5.8.0",
+		"eslint-plugin-jest": "^22.3.0",
 		"eslint-plugin-vue": "^5.0.0",
 		"jest": "^24.1.0",
 		"jest-transform-stub": "^2.0.0",
@@ -44,9 +45,12 @@
 		},
 		"extends": [
 			"plugin:vue/essential",
-			"eslint:recommended"
+			"eslint:recommended",
+			"plugin:jest/recommended"
 		],
-		"rules": {},
+		"plugins": [
+			"jest"
+		],
 		"parserOptions": {
 			"parser": "babel-eslint"
 		}
@@ -70,7 +74,7 @@
 		],
 		"transform": {
 			"^.*\\.(vue)$": "vue-jest",
-			".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+			".+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$": "jest-transform-stub",
 			"^.+\\.jsx?$": "babel-jest"
 		},
 		"transformIgnorePatterns": [

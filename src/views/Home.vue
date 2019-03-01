@@ -23,5 +23,7 @@ export default {
 		border-radius: 4px;
 		overflow: hidden;
 		border: 1px solid #dcdfe6;
+		max-width: 900px;
+   		margin: auto;
 	}
 </style>
