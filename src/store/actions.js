@@ -1,5 +1,5 @@
 import Vue from "vue";
-const BASE_URL = 'http://localhost:5000/API';
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/API' : 'http://localhost:5000/API';
 
 function orderById(collection) {
 	return collection.sort((a, b) => {
