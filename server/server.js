@@ -5,6 +5,9 @@ const todosRouter = require('./core/routes/todos.js');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../dist')));
+
 const basePath = '/api';
 
 // console.log that your server is up and running
